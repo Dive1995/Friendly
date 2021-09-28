@@ -4,10 +4,13 @@ import { ThemeProvider } from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getPosts } from "./actions/posts";
+import Container from "./Styles/Container.styled";
+import GlobalStyles from "./Styles/Global.styled";
 
 const theme = {
   colors: {
-    createPost: 'grey',
+    body: '#f5f5f5',
+    post: '#fff'
   }
 }
 
@@ -23,8 +26,12 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <CreatePost/>
-      <HomeFeed/>
+      <GlobalStyles/>
+      {/* <Header/> */}
+      <Container>
+        <CreatePost/>
+        <HomeFeed/>
+      </Container>
     </ThemeProvider>
   );
 }

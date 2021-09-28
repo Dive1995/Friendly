@@ -1,36 +1,45 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { createPost } from "../../actions/posts"
-import { StyledCreatePost } from "./CreatePost.styled"
+import { ButtonContainer, Content, StyledCreatePost } from "./CreatePost.styled"
 import FileBase from 'react-file-base64'
+import Button from "../../Styles/Button.styled"
+import Input from "../../Styles/Input.styled"
 
 function CreatePost() {
     const dispatch = useDispatch()
-    const [ postData, setPostData ] = useState({ title:'', message:'', creator:'Dive', selectedFile:''})
+    const [ postData, setPostData ] = useState({ title:'', creator:'Dive', selectedFile:''})
 
 
     const handleSubmit = (e) => {
         e.preventDefault()
         dispatch(createPost(postData))
+        setPostData({ title:'', creator:'Dive', selectedFile:''})
     }
 
-    const clear = () => {
-
+    const clear = (e) => {
+        e.preventDefault()
+        setPostData({ title:'', creator:'Dive', selectedFile:''})
     }
 
 
     return (
         <StyledCreatePost>
             <form action="" onSubmit={handleSubmit}>
-                <input type="text" value={postData.title} onChange={(e) => setPostData({...postData, title:e.target.value})}/>
-                <input type="text" onChange={(e) => setPostData({...postData, message:e.target.value})}/>
-                <FileBase
-                    type= "file"
-                    multiple={false}
-                    onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64})}
-                />
-                <button type='submit'>Add Posts</button>
-                <button onClick={clear}>Clear</button>
+                <Content>
+                    <Input placeholder="What's on your mind!" type="text" value={postData.title} onChange={(e) => setPostData({...postData, title:e.target.value})}/>
+                    {/* <input type="text" value={postData.message} onChange={(e) => setPostData({...postData, message:e.target.value})}/> */}
+                    <FileBase
+                        type= "file"
+                        value={postData.selectedFile}
+                        multiple={false}
+                        onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64})}
+                    />
+                </Content>
+                <ButtonContainer>
+                    <Button bg="green" type='submit'>Post</Button>
+                    <Button bg="red" onClick={clear}>Clear</Button>
+                </ButtonContainer>
             </form>
         </StyledCreatePost>
     )

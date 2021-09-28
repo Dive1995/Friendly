@@ -3,17 +3,17 @@ const mongoose = require('mongoose')
 const postSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: [true, 'Title is required']
+        // required: [true, 'Title is required']
     },
-    message: {
-        type: String,
-    },
+    // message: {
+    //     type: String,
+    // },
     creator: {
         type: String,
     },
     createdAt: {
         type: Date,
-        default: new Date()
+        default: Date.now()
     },
     selectedFile: String
 })
