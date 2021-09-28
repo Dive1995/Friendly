@@ -1,12 +1,15 @@
-import axios from "axios"
-
-const postReducer = (state, action) => {
+const postReducer = (posts = [], action) => {
     switch (action.type){
-        case "CREATE_POST":
-            state.push(action.payload)
-            return state
+        case "FETCH_ALL":
+            posts = action.payload
+            return posts
 
+        case "CREATE_POST":
+            // posts.push(action.payload)
+            return [ ...posts, action.payload ]
+        default :
+            return posts;
     }
 }
 
-axios.post(url, { body: {} })
+export default postReducer

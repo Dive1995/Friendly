@@ -1,11 +1,15 @@
+import { useSelector } from "react-redux";
+
 const { default: Post } = require("../Post/Post");
 
 function HomeFeed() {
+
+    const posts = useSelector((state) => state.posts)
+    
+
     return (
         <div>
-            <Post/>
-            <Post/>
-            <Post/>
+            {posts.map((post) => <Post key={post._id} post={post}/>)}
         </div>
     )
 }

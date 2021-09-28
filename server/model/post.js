@@ -8,13 +8,14 @@ const postSchema = new mongoose.Schema({
     message: {
         type: String,
     },
-    creater: {
+    creator: {
         type: String,
     },
     createdAt: {
         type: Date,
         default: new Date()
-    }
+    },
+    selectedFile: String
 })
 
 const Post = mongoose.model('Post', postSchema)
