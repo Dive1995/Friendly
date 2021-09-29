@@ -4,14 +4,11 @@ import {useDispatch} from 'react-redux'
 import { deletePost } from "../../../actions/posts"
 import moment from 'moment'
 import Button from "../../../Styles/Button.styled"
+import { setId } from "../../../actions/currentId"
+
 
 function PostHeader({ creator, createdAt, id }) {
     const dispatch = useDispatch()
-
-    const handleDelete = () => {
-        console.log(id);
-        dispatch(deletePost(id))
-    }
 
     return (
         <StyledPostHeader>
@@ -20,9 +17,10 @@ function PostHeader({ creator, createdAt, id }) {
                 <Time>{moment(createdAt).fromNow()}</Time>
             </UserDetails>
             <Options>
-                <FaEllipsisH className="icon" onClick={handleDelete}/>
+                <FaEllipsisH className="icon" onClick={() => dispatch(deletePost(id))}/>
             </Options>
-                {/* <Button>Edit</Button> */}
+            <Button onClick={() => dispatch(setId(id))}>Edit</Button>
+            
         </StyledPostHeader>
     )
 }

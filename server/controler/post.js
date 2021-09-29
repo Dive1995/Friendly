@@ -23,6 +23,7 @@ module.exports.deletePost = async (req, res) => {
 
 module.exports.updatePost = async (req, res) => {
     const id = req.params.id;
+    console.log(req.body);
     if(!mongoose.Types.ObjectId.isValid(id)) return res.status(400).send("No post found, to delete")
     const post = await Post.findByIdAndUpdate({_id: id}, req.body, { new: true, runValidators: true })
     if(!post) return res.status(404).send("Post doesn't exist");

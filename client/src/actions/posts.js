@@ -27,3 +27,13 @@ export const deletePost = (id) => async (dispatch) => {
         console.log(error);
     }
 }
+
+export const updatePost = (id, newPost) => async (dispatch) => {
+    try {
+        const post = await api.updatePost(id, newPost)
+        console.log(newPost);
+        dispatch({ type: "UPDATE_POST", payloda: post})
+    } catch (error) {
+        console.log(error);
+    }
+}

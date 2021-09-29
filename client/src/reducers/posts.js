@@ -11,6 +11,9 @@ const postReducer = (posts = [], action) => {
         case "DELETE_POST":
             return posts.filter((post) => post._id !== action.payload)
 
+        case "UPDATE_POST":
+            return posts
+
         default :
             return posts;
     }

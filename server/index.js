@@ -2,9 +2,12 @@ require('express-async-errors')
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
-const app = express()
 const posts = require('./routes/posts')
 const error = require('./middleware/error')
+const dotenv = require('dotenv')
+const app = express()
+
+dotenv.config()
 
 // middlewares
 app.use(express.json({ limit:"30mb" }))
@@ -19,7 +22,7 @@ app.use('/posts', posts)
 app.use(error)
 
 // connect to DB
-const connectionURL = 'mongodb+srv://dive:dive1234@nodeexpressprojects.fyik5.mongodb.net/socialmedia?retryWrites=true&w=majority'
+const connectionURL = process.env.CONNECTION_URL;
 const port = process.env.PORT || 5000;
 
 

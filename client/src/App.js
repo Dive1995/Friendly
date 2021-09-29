@@ -2,7 +2,7 @@ import CreatePost from "./components/CreatePost/CreatePost";
 import HomeFeed from "./components/HomeFeed/HomeFeed";
 import { ThemeProvider } from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getPosts } from "./actions/posts";
 import Container from "./Styles/Container.styled";
 import GlobalStyles from "./Styles/Global.styled";
@@ -16,7 +16,6 @@ const theme = {
 }
 
 function App() {
-
   const dispatch = useDispatch()
   const posts = useSelector(state => state.posts)
   console.log(posts);
@@ -25,13 +24,15 @@ function App() {
     dispatch(getPosts())
   }, [dispatch])
 
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles/>
       <Nav/>
       <Container>
-        <CreatePost/>
-        <HomeFeed/>
+        {/* {modalOpen && <Modal />} */}
+        <CreatePost />
+        <HomeFeed />
       </Container>
     </ThemeProvider>
   );

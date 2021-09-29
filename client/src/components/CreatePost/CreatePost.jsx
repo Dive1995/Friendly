@@ -1,6 +1,6 @@
-import { useState } from "react"
-import { useDispatch } from "react-redux"
-import { createPost } from "../../actions/posts"
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { createPost, updatePost } from "../../actions/posts"
 import { ButtonContainer, Content, StyledCreatePost } from "./CreatePost.styled"
 import FileBase from 'react-file-base64'
 import Button from "../../Styles/Button.styled"
@@ -9,11 +9,23 @@ import Input from "../../Styles/Input.styled"
 function CreatePost() {
     const dispatch = useDispatch()
     const [ postData, setPostData ] = useState({ title:'', creator:'Akka Samayal', selectedFile:''})
+    const currentId = useSelector(state => state.currentId)
+    const post = useSelector(state => currentId ? state.posts.find(item => item._id == currentId) : null)
 
+
+    useEffect(() => {
+        if(post){
+            setPostData(post)
+        }
+    }, [post])
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(createPost(postData))
+        if(currentId){
+            dispatch(updatePost(currentId, postData))
+        }else{
+            dispatch(createPost(postData))
+        }
         setPostData({ title:'', creator:'Dive', selectedFile:''})
     }
 
