@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { getPosts } from "./actions/posts";
 import Container from "./Styles/Container.styled";
 import GlobalStyles from "./Styles/Global.styled";
+import Nav from "./components/Nav/Nav";
 
 const theme = {
   colors: {
@@ -27,7 +28,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles/>
-      {/* <Header/> */}
+      <Nav/>
       <Container>
         <CreatePost/>
         <HomeFeed/>

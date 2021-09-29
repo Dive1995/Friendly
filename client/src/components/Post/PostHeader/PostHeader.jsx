@@ -1,10 +1,16 @@
-import StyledPostHeader from "./PostHeader.styled"
+import {Options, StyledPostHeader, Time, User, UserDetails} from "./PostHeader.styled"
+import { FaEllipsisH} from 'react-icons/fa'
 
 function PostHeader({ creator, createdAt }) {
     return (
         <StyledPostHeader>
-            <span><p className="creator">{creator}</p></span>
-            <span className="createdAt">{createdAt}</span>
+            <UserDetails>
+                <User>{creator}</User>
+                <Time>{createdAt}</Time>
+            </UserDetails>
+            <Options>
+                <FaEllipsisH className="icon"/>
+            </Options>
         </StyledPostHeader>
     )
 }
