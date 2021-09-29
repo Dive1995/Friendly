@@ -1,3 +1,4 @@
+import Like from "./Like/Like"
 import { Content, ImageContainer, StyledPost } from "./Post.styled"
 import PostHeader from "./PostHeader/PostHeader"
 
@@ -13,6 +14,7 @@ function Post({post}) {
             <ImageContainer>
                 {post.selectedFile && <img src={post.selectedFile} alt='' />}
             </ImageContainer>
+            <Like/>
         </StyledPost>
     )
 }

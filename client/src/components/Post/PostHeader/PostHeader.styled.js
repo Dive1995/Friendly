@@ -9,7 +9,7 @@ export const StyledPostHeader = styled.div`
     .icon{
         color: gray;
     }
-    
+
 `
 export const UserDetails = styled.div`
     display: flex;
@@ -40,4 +40,14 @@ export const Options = styled.span`
         background-color: rgba(0,0,0,0.1);
         cursor: pointer;
     }
+
+    ${'' /* &::after {
+        content:'';
+        display: block;
+        right:30px;
+        position: absolute;
+        height: 100px;
+        width: 200px;
+        background-color:red;
+    } */}
 `

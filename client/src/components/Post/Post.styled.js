@@ -5,10 +5,12 @@ export const StyledPost = styled.div`
     box-shadow: 0 0 3px rgba(0,0,0,0.2);
     border-radius: 5px;
     margin-bottom: 20px;
+
 `
 
 export const Content = styled.div`
     padding: 20px;
+    padding-bottom: 0px;
 `
 
 export const ImageContainer = styled.div`
@@ -20,3 +22,4 @@ export const ImageContainer = styled.div`
         object-fit: contain;
     } */}
 `
+

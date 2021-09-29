@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import Loading from "../Loading/Loading";
 
 const { default: Post } = require("../Post/Post");
 
@@ -6,6 +7,9 @@ function HomeFeed() {
 
     const posts = useSelector((state) => state.posts)
     
+    if(posts?.length < 1){
+        return <Loading/>
+    }
 
     return (
         <div>
