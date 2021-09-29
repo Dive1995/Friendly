@@ -20,7 +20,7 @@ export const User = styled.p`
     display: inline;
     font-weight: bold;
     font-size:1.1rem;
-    color:red;
+    color:#333;
     text-transform: capitalize;
     margin: 0;
     margin-bottom: 5px;
@@ -34,7 +34,8 @@ export const Time = styled.p`
 
 export const Options = styled.span`
     border-radius: 50%;
-    padding: 10px;
+    padding: 5px;
+    transition: all 300ms ease-in-out;
 
     &:hover{
         background-color: rgba(0,0,0,0.1);

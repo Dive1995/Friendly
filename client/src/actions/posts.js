@@ -19,3 +19,11 @@ export const createPost = (postData) => async (dispatch) => {
     // return { type: "CREATE_POST", payload: data }
 }
 
+export const deletePost = (id) => async (dispatch) => {
+    try {
+        await api.deletePost(id)
+        dispatch({ type: "DELETE_POST", payload: id })
+    } catch (error) {
+        console.log(error);
+    }
+}

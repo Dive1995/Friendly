@@ -8,7 +8,7 @@ import Input from "../../Styles/Input.styled"
 
 function CreatePost() {
     const dispatch = useDispatch()
-    const [ postData, setPostData ] = useState({ title:'', creator:'Dive', selectedFile:''})
+    const [ postData, setPostData ] = useState({ title:'', creator:'Akka Samayal', selectedFile:''})
 
 
     const handleSubmit = (e) => {

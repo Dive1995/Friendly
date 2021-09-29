@@ -2,7 +2,7 @@ const Post = require("../model/post")
 const mongoose = require('mongoose')
 
 module.exports.getPosts = async(req, res) => {
-    const posts = await Post.find()
+    const posts = await Post.find().sort('-createdAt')
     res.send(posts)
 }
 

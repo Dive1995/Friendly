@@ -6,6 +6,7 @@ function Like() {
         <StyledLike>
             {/* <FaHeart className="heart"/> */}
             <FaRegHeart className="heart"/>
+            <p>100+</p>
         </StyledLike>
     )
 }
