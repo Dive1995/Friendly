@@ -26,7 +26,7 @@ const connectionURL = process.env.CONNECTION_URL;
 const port = process.env.PORT || 5000;
 
 
-mongoose.connect(connectionURL)
+mongoose.connect('mongodb://localhost/Friendly')
 .then(() => {
     app.listen(port, console.log(`Connected to port ${port}`))
 })

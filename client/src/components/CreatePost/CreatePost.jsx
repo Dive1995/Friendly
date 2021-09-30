@@ -10,7 +10,7 @@ function CreatePost() {
     const dispatch = useDispatch()
     const [ postData, setPostData ] = useState({ title:'', creator:'Akka Samayal', selectedFile:''})
     const currentId = useSelector(state => state.currentId)
-    const post = useSelector(state => currentId ? state.posts.find(item => item._id == currentId) : null)
+    const post = useSelector(state => currentId ? state.posts.find(item => item._id === currentId) : null)
 
 
     useEffect(() => {

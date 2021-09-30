@@ -1,16 +1,17 @@
 const Post = require("../model/post")
 const mongoose = require('mongoose')
+const _ = require('lodash')
 
 module.exports.getPosts = async(req, res) => {
     const posts = await Post.find().sort('-createdAt')
-    res.send(posts)
+    res.json(posts)
 }
 
 module.exports.createPost = async (req, res) => {
     if(!(req.body.title || req.body.selectedFile)) return res.status(400).send("Add some content!!")
-    const post = await new Post(req.body)
+    const post = await new Post(_.pick(req.body, ['title', 'selectedFile', 'creator']))
     await post.save()
-    res.send(post)
+    res.json(post)
 }
 
 module.exports.deletePost = async (req, res) => {
@@ -18,16 +19,15 @@ module.exports.deletePost = async (req, res) => {
     if(!mongoose.Types.ObjectId.isValid(id)) return res.status(400).send("No post found, to delete")
     const post = await Post.findByIdAndDelete(id)
     if(!post) return res.status(404).send("Post doesn't exist");
-    res.send("Post deleted ! : " + post)
+    res.json(post)
 }
 
 module.exports.updatePost = async (req, res) => {
     const id = req.params.id;
-    console.log(req.body);
     if(!mongoose.Types.ObjectId.isValid(id)) return res.status(400).send("No post found, to delete")
-    const post = await Post.findByIdAndUpdate({_id: id}, req.body, { new: true, runValidators: true })
+    const post = await Post.findByIdAndUpdate({_id: id}, _.pick(req.body, ['title', 'selectedFile', 'creator']), { new: true, runValidators: true })
     if(!post) return res.status(404).send("Post doesn't exist");
-    res.send("Post deleted ! : " + post)
+    res.json(post)
 }
 
 module.exports.getSinglePost = async (req, res) => {
@@ -35,5 +35,5 @@ module.exports.getSinglePost = async (req, res) => {
     if(!mongoose.Types.ObjectId.isValid(id)) return res.status(400).send("No post found")
     const post = await Post.findById(id)
     if(!post) return res.status(404).send('No post');
-    res.send(post)
+    res.json(post)
 }

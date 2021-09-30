@@ -12,7 +12,12 @@ const postReducer = (posts = [], action) => {
             return posts.filter((post) => post._id !== action.payload)
 
         case "UPDATE_POST":
-            return posts
+            return posts.map((post) => {
+                if(post._id === action.payload.id){
+                    return action.payload.data
+                }
+                return post
+            })
 
         default :
             return posts;

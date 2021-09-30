@@ -2,7 +2,7 @@ import CreatePost from "./components/CreatePost/CreatePost";
 import HomeFeed from "./components/HomeFeed/HomeFeed";
 import { ThemeProvider } from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { getPosts } from "./actions/posts";
 import Container from "./Styles/Container.styled";
 import GlobalStyles from "./Styles/Global.styled";
