@@ -3,6 +3,8 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const posts = require('./routes/posts')
+const users = require('./routes/users')
+const auth = require('./routes/auth')
 const error = require('./middleware/error')
 const dotenv = require('dotenv')
 const app = express()
@@ -15,7 +17,9 @@ app.use(express.urlencoded({ limit:"30mb", extended: true }))
 app.use(cors())
 
 // routes
-app.use('/posts', posts)
+app.use('/api/posts', posts)
+app.use('/api/users', users)
+app.use('/api/auth', auth)
 
 
 // error handling
