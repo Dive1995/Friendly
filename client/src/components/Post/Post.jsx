@@ -14,7 +14,7 @@ function Post({post}) {
             <ImageContainer>
                 {post.selectedFile && <img src={post.selectedFile} alt='' />}
             </ImageContainer>
-            <Like/>
+            <Like likes={post.likes} id={post._id}/>
         </StyledPost>
     )
 }

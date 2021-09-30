@@ -19,7 +19,7 @@ function PostHeader({ creator, createdAt, id }) {
             <Options>
                 <FaEllipsisH className="icon" onClick={() => dispatch(deletePost(id))}/>
             </Options>
-            <Button onClick={() => dispatch(setId(id))}>Edit</Button>
+            <Button bg="hsl(222, 100%, 61%)" onClick={() => dispatch(setId(id))}>Edit</Button>
             
         </StyledPostHeader>
     )

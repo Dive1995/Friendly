@@ -6,12 +6,20 @@ const postReducer = (posts = [], action) => {
 
         case "CREATE_POST":
             // posts.push(action.payload)
-            return [ ...posts, action.payload ]
+            return [ action.payload, ...posts ]
         
         case "DELETE_POST":
             return posts.filter((post) => post._id !== action.payload)
 
         case "UPDATE_POST":
+            return posts.map((post) => {
+                if(post._id === action.payload.id){
+                    return action.payload.data
+                }
+                return post
+            })
+
+        case "UPDATE_LIKE":
             return posts.map((post) => {
                 if(post._id === action.payload.id){
                     return action.payload.data

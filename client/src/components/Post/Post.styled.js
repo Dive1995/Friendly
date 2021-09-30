@@ -15,11 +15,14 @@ export const Content = styled.div`
 
 export const ImageContainer = styled.div`
     max-height: 600px;
+    width:100%;
+    margin: 0 auto;
+    margin-top: 10px;
     overflow: hidden;
 
-    ${'' /* img{
-        height: 100%;
+    img{
+        margin:0 auto;
         object-fit: contain;
-    } */}
+    }
 `
 

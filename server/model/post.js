@@ -13,9 +13,13 @@ const postSchema = new mongoose.Schema({
     },
     createdAt: {
         type: Date,
-        default: Date.now()
+        default: Date.now
     },
-    selectedFile: String
+    selectedFile: String,
+    likes: {
+        type: Number,
+        default: 0
+    }
 })
 
 const Post = mongoose.model('Post', postSchema)

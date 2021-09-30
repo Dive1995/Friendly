@@ -2,14 +2,13 @@ import styled from "styled-components";
 
 const Button = styled.button`
     cursor: pointer;
-    font-size: 16px;
-    padding: 1rem 3rem;
+    font-size: 13px;
+    padding: 0.75rem 1.5rem;
     margin-right: 10px;
     font-weight: bold;
-    ${'' /* background-color: ${(bg) => bg || "#ff0099"}; */}
-    background-color:#ff0099;
+    background-color: ${({bg}) => bg};
     color: #fff;
-    border-radius: 50px;
+    border-radius: 20px;
     border: none;
     letter-spacing: 1px;
     box-shadow: 0 0 5px  rgba(0,0,0,0.2);
