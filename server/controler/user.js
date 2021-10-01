@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt')
 
 
 module.exports.createUser = async (req, res) =>  {
-    const {error} = await validateUser(req.body)
+    const {error} = validateUser(req.body)
     if(error) return res.status(400).send(error.details[0].message)
 
     let user = await User.findOne({ email: req.body.email })
@@ -16,8 +16,6 @@ module.exports.createUser = async (req, res) =>  {
 
     user.password = hashedPassword;
     user.save()
-
-    console.log(user);
 
     // generate auth token
     const token = await user.generateAuthToken()

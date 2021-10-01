@@ -1,4 +1,6 @@
 const mongoose = require('mongoose')
+const Joi = require('joi')
+Joi.objectId = require('joi-objectid')(Joi)
 
 const postSchema = new mongoose.Schema({
     title: {
@@ -13,6 +15,7 @@ const postSchema = new mongoose.Schema({
     // },
     creator: {
         type: String,
+        required: true
     },
     createdAt: {
         type: Date,
@@ -25,6 +28,16 @@ const postSchema = new mongoose.Schema({
     }
 })
 
+const validatePost = (req) => {
+    const schema = Joi.object({
+        title: Joi.string(),
+        creator: Joi.objectId()
+    })
+
+    return schema.validate(req)
+}
+
 const Post = mongoose.model('Post', postSchema)
 
-module.exports = Post;
+module.exports.Post = Post;
+module.exports.validatePost = validatePost

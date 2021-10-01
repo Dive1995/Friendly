@@ -1,4 +1,4 @@
-const Post = require("../model/post")
+const {Post, validatePost} = require("../model/post")
 const mongoose = require('mongoose')
 const _ = require('lodash')
 
@@ -8,7 +8,11 @@ module.exports.getPosts = async(req, res) => {
 }
 
 module.exports.createPost = async (req, res) => {
+    const {error} = validatePost(req.body)
+    if(error) return res.status(400).send(error.details[0].message)
+
     if(!(req.body.title || req.body.selectedFile)) return res.status(400).send("Add some content!!")
+
     const post = await new Post(_.pick(req.body, ['title', 'selectedFile', 'creator']))
     await post.save()
     res.json(post)
@@ -23,8 +27,12 @@ module.exports.deletePost = async (req, res) => {
 }
 
 module.exports.updatePost = async (req, res) => {
+    const {error} = validatePost(req.body)
+    if(error) return res.status(400).send(error.details[0].message)
+
     const id = req.params.id;
     if(!mongoose.Types.ObjectId.isValid(id)) return res.status(400).send("No post found, to delete")
+    
     const post = await Post.findByIdAndUpdate({_id: id}, {
         createdAt: Date.now() , ..._.pick(req.body, ['title', 'selectedFile', 'creator'])
         }, 
