@@ -7,7 +7,6 @@ function Like({likes, id}) {
     const dispatch = useDispatch()
 
     const triggerLike = (id) => {   
-        console.log("Liked");
         dispatch(updateLike(id))
     }
 
@@ -15,7 +14,7 @@ function Like({likes, id}) {
         <StyledLike>
             {/* <FaHeart className="heart"/> */}
             <FaRegHeart className="heart" onClick={() => triggerLike(id)}/>
-            <p>{likes}</p>
+            <p>{likes.length}</p>
         </StyledLike>
     )
 }

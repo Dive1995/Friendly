@@ -29,10 +29,9 @@ module.exports.deletePost = async (req, res) => {
 module.exports.updatePost = async (req, res) => {
     const {error} = validatePost(req.body)
     if(error) return res.status(400).send(error.details[0].message)
-
+    
     const id = req.params.id;
     if(!mongoose.Types.ObjectId.isValid(id)) return res.status(400).send("No post found, to delete")
-    
     const post = await Post.findByIdAndUpdate({_id: id}, {
         createdAt: Date.now() , ..._.pick(req.body, ['title', 'selectedFile', 'creator'])
         }, 
@@ -50,12 +49,22 @@ module.exports.getSinglePost = async (req, res) => {
 }
 
 module.exports.updateLike = async (req, res) => {
-    const id = req.params.id;
-    if(!mongoose.Types.ObjectId.isValid(id)) return res.status(400).send("No post found")
-    const post = await Post.findByIdAndUpdate({_id: id}, {
-        $inc : {
-            likes: 1
-        }
-    }, {new:true})
-    res.json(post)
+    const userId = req.headers.userId;
+    console.log(userId);
+
+    if(!mongoose.Types.ObjectId.isValid(req.params.id)) return res.status(400).json({message: "No post found"})
+
+    let post = await Post.findById(req.params.id)
+    if(!post) return res.status(404).json({message: "No post found"})
+
+    const index = post.likes.findIndex((id) => id === userId)
+
+    if(index === -1){
+        post.likes.push(userId)
+    }else{
+        post.likes = post.likes.filter((id) => id !== userId)
+    }
+
+    const newPost = await Post.findByIdAndUpdate({_id: req.params.id}, post, {new:true})
+    res.json(newPost)
 }

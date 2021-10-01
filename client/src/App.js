@@ -1,3 +1,4 @@
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import CreatePost from "./components/CreatePost/CreatePost";
 import HomeFeed from "./components/HomeFeed/HomeFeed";
 import { ThemeProvider } from "styled-components";
@@ -7,6 +8,7 @@ import { getPosts } from "./actions/posts";
 import Container from "./Styles/Container.styled";
 import GlobalStyles from "./Styles/Global.styled";
 import Nav from "./components/Nav/Nav";
+import Auth from './components/Auth/Auth';
 
 const theme = {
   colors: {
@@ -18,7 +20,9 @@ const theme = {
 function App() {
   const dispatch = useDispatch()
   const posts = useSelector(state => state.posts)
+  const user = useSelector(state => state.user)
   console.log(posts);
+  console.log(user);
 
   useEffect(() => {
     dispatch(getPosts())
@@ -28,12 +32,21 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles/>
-      <Nav/>
-      <Container>
-        {/* {modalOpen && <Modal />} */}
-        <CreatePost />
-        <HomeFeed />
-      </Container>
+      <Router>
+          <Nav/>
+          <Container>
+          <Switch>
+            <Route exact path='/'>
+                {/* {modalOpen && <Modal />} */}
+                <CreatePost />
+                <HomeFeed />
+            </Route>
+          <Route exact path="/auth">
+            <Auth/>
+          </Route>
+          </Switch>
+          </Container>
+      </Router>
     </ThemeProvider>
   );
 }
