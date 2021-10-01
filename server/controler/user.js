@@ -19,7 +19,8 @@ module.exports.signUp = async (req, res) =>  {
 
     // generate auth token
     const token = await user.generateAuthToken()
-    res.json({user, token})
+    const userData = _.pick(user, ["email", "firstName", "lastName"])
+    res.json({user: userData, token})
     // res.json(user)
 }
 

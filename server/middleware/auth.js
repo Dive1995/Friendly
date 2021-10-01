@@ -1,10 +1,11 @@
 const jwt = require('jsonwebtoken')
 
 module.exports = (req, res, next) => {
-    const token = req.headers.Authorization
-    if(!token) return res.status(401).json({message:'Please Login to continue'})
-
     try {
+        // console.log(req.headers);
+        const token = req.headers.authorization.split(' ')[1]
+        console.log(token);
+        if(!token) return res.status(401).json({message:'Please Login to continue'})
         const decoded = jwt.verify(token, process.env.JWT_AUTH_TOKEN)
         req.userId = decoded.id;
         next()

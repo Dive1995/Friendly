@@ -19,7 +19,8 @@ const userSchema = mongoose.Schema({
     },
     email: {
         type: String,
-        unique: true
+        unique: true,
+        lowercase: true
     },
     password: {
         type: String,
@@ -37,7 +38,7 @@ const userSchema = mongoose.Schema({
 })
 
 userSchema.methods.generateAuthToken = () => {
-    return jwt.sign({ id: this._id }, process.env.JWT_AUTH_TOKEN)
+    return jwt.sign({ id: this._id, lastName: this.lastName }, process.env.JWT_AUTH_TOKEN)
 }
 
 

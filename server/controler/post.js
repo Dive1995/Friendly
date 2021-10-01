@@ -8,6 +8,7 @@ module.exports.getPosts = async(req, res) => {
 }
 
 module.exports.createPost = async (req, res) => {
+    console.log(req.headers.userId)
     const {error} = validatePost(req.body)
     if(error) return res.status(400).send(error.details[0].message)
 
