@@ -9,13 +9,10 @@ module.exports.getPosts = async(req, res) => {
 
 module.exports.createPost = async (req, res) => {
     const {error} = validatePost(req.body)
-    console.log({error});
     if(error) return res.status(400).json({message: error.details[0].message})
-console.log({originalpost: req.body});
     if(!(req.body.title || req.body.selectedFile)) return res.status(400).send("Add some content!!")
 
     const post = await new Post(req.body)
-    console.log({post});
     await post.save()
     res.json(post)
 }
@@ -51,7 +48,7 @@ module.exports.getSinglePost = async (req, res) => {
 }
 
 module.exports.updateLike = async (req, res) => {
-    const userId = req.headers.userId;
+    const userId = req.userId;
     console.log(userId);
 
     if(!mongoose.Types.ObjectId.isValid(req.params.id)) return res.status(400).json({message: "No post found"})

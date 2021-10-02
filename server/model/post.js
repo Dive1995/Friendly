@@ -27,7 +27,7 @@ const validatePost = (req) => {
         title: Joi.string().trim(),
         creator: Joi.objectId(),
         selectedFile: Joi.string().empty('')
-    })
+    }).unknown(true)
 
     return schema.validate(req)
 }
