@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Joi = require('joi')
+const { userSchema } = require('./user')
 Joi.objectId = require('joi-objectid')(Joi)
 
 const postSchema = new mongoose.Schema({
@@ -8,7 +9,13 @@ const postSchema = new mongoose.Schema({
         trim: true
     },
     creator: {
-        type: String,
+        type: new mongoose.Schema({
+            userName: {
+                type: String,
+                required: true
+            },
+            profilePic: String,
+        }),
         required: true
     },
     createdAt: {
@@ -25,7 +32,7 @@ const postSchema = new mongoose.Schema({
 const validatePost = (req) => {
     const schema = Joi.object({
         title: Joi.string().trim(),
-        creator: Joi.objectId(),
+        creatorId: Joi.string().required(),
         selectedFile: Joi.string().empty('')
     }).unknown(true)
 

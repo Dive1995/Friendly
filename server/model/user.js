@@ -56,5 +56,6 @@ function validateUser(data){
     return schema.validate(data)
 }
 
+module.exports.userSchema = userSchema
 module.exports.validateUser = validateUser
 module.exports.User = User

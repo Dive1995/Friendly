@@ -40,7 +40,7 @@ function Auth() {
                 <Input type="password" name="password" placeholder="Password" onChange={handleChange}/>
                 <Button bg={isSignUp ? "blue" : "green"} type="submit">{isSignUp ? "Sign Up" : "Sign In"}</Button>
             </form>
-            <a href='' onClick={() => setIsSignUp(!isSignUp)}>{isSignUp ? "Already have an account?" : "Don't have an account?"}</a>
+            <a onClick={() => setIsSignUp(!isSignUp)}>{isSignUp ? "Already have an account?" : "Don't have an account?"}</a>
         </StyledAuth>
     )
 }

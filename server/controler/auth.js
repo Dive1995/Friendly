@@ -1,6 +1,7 @@
 const { User } = require("../model/user")
 const bcrypt = require('bcrypt')
 const Joi = require('joi')
+const _ = require('lodash')
 
 module.exports.login = async (req, res) => {
     const { error } = validate(req.body)
@@ -13,13 +14,15 @@ module.exports.login = async (req, res) => {
     if(!validPassword) return res.status(400).json({message: "Invalid email or password."})
     
     const token = await user.generateAuthToken()
-    res.json({user, token})
+
+    const userData = _.pick(user, ["_id", "email", "firstName", "lastName"])
+    res.json({user:userData, token})
 }
 
 function validate(req){
     const schema = Joi.object({
-        email: Joi.string().min(2).max(50).email().required(),
-        password: Joi.string().min(8).required()
+        email: Joi.string().max(50).email().required(),
+        password: Joi.string().required()
     }).unknown(true)
 
     return schema.validate(req)

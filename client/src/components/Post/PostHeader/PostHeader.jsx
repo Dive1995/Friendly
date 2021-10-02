@@ -13,7 +13,7 @@ function PostHeader({ creator, createdAt, id }) {
     return (
         <StyledPostHeader>
             <UserDetails>
-                <User>{creator}</User>
+                <User>{creator.userName}</User>
                 <Time>{moment(createdAt).fromNow()}</Time>
             </UserDetails>
             <Options>

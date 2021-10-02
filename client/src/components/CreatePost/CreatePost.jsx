@@ -7,7 +7,7 @@ import Button from "../../Styles/Button.styled"
 import Input from "../../Styles/Input.styled"
 import { setId } from "../../actions/currentId"
 
-const initialPostState = { title:'', creator: JSON.parse(localStorage?.getItem('userProfile'))?.user._id, selectedFile:''}
+const initialPostState = { title:'', creatorId: JSON.parse(localStorage?.getItem('userProfile'))?.user._id, selectedFile:''}
 
 function CreatePost() {
     const dispatch = useDispatch()
@@ -15,6 +15,8 @@ function CreatePost() {
     const currentId = useSelector(state => state.currentId)
     const post = useSelector(state => currentId ? state.posts.find(item => item._id === currentId) : null)
     const imageInputRef = useRef()
+
+    console.log({postData});
 
     useEffect(() => {
         if(post){
