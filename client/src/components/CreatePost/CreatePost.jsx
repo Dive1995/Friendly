@@ -16,17 +16,16 @@ function CreatePost() {
     const post = useSelector(state => currentId ? state.posts.find(item => item._id === currentId) : null)
     const imageInputRef = useRef()
 
-    console.log({postData});
-
     useEffect(() => {
         if(post){
-            setPostData(post)
+            setPostData({...postData, ...post})
         }
     }, [post])
 
     const handleSubmit = (e) => {
         e.preventDefault()
         if(currentId){
+            console.log({postData});
             dispatch(updatePost(currentId, postData))
         }else{
             console.log({postData});

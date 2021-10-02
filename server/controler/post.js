@@ -41,20 +41,23 @@ module.exports.deletePost = async (req, res) => {
 
 module.exports.updatePost = async (req, res) => {
     const userId = req.userId;
-
+    console.log({postid:req.params.id});
+    console.log({ createId:req.body.creatorId});
+    console.log("11111")
     if(!mongoose.Types.ObjectId.isValid(req.params.id)) return res.status(404).json({message:"The post doesn't exist"})
     
-    const user = await User.findById(userId)
+    const user = await User.findById(req.body.creatorId)
     if(!user) res.status(401).json({message: "Access Denied"})
-
+    console.log("22222")
     const {error} = validatePost(req.body)
     if(error) return res.status(400).send(error.details[0].message)
-
+    console.log("3333")
     let post = await Post.findById(req.params.id)
+    console.log({post});
     if(!post) return res.status(404).send("Post doesn't exist");
-
-    if(post.creator._id !== userId) return res.status(403).json({message: "Access Denied"})
-
+    console.log("444")
+    if(post.creator._id.toString() !== userId) return res.status(403).json({message: "Access Denied"})
+    console.log("555")
     // client: only the creator gets the edit, delete buttons
 
     post.title = req.body.title,
