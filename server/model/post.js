@@ -4,15 +4,9 @@ Joi.objectId = require('joi-objectid')(Joi)
 
 const postSchema = new mongoose.Schema({
     title: {
-        type: {
-            type:String,
-            trim: true
-        },
-        // required: [true, 'Title is required']
+        type:String,
+        trim: true
     },
-    // message: {
-    //     type: String,
-    // },
     creator: {
         type: String,
         required: true
@@ -30,8 +24,9 @@ const postSchema = new mongoose.Schema({
 
 const validatePost = (req) => {
     const schema = Joi.object({
-        title: Joi.string(),
-        creator: Joi.objectId()
+        title: Joi.string().trim(),
+        creator: Joi.objectId(),
+        selectedFile: Joi.string().empty('')
     })
 
     return schema.validate(req)

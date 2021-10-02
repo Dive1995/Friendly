@@ -7,9 +7,11 @@ import Button from "../../Styles/Button.styled"
 import Input from "../../Styles/Input.styled"
 import { setId } from "../../actions/currentId"
 
+const initialPostState = { title:'', creator: JSON.parse(localStorage?.getItem('userProfile'))?.user._id, selectedFile:''}
+
 function CreatePost() {
     const dispatch = useDispatch()
-    const [ postData, setPostData ] = useState({ title:'', creator:'Dive95', selectedFile:''})
+    const [ postData, setPostData ] = useState(initialPostState)
     const currentId = useSelector(state => state.currentId)
     const post = useSelector(state => currentId ? state.posts.find(item => item._id === currentId) : null)
     const imageInputRef = useRef()
@@ -25,16 +27,16 @@ function CreatePost() {
         if(currentId){
             dispatch(updatePost(currentId, postData))
         }else{
+            console.log({postData});
             dispatch(createPost(postData))
         }
         dispatch(setId(null))
-        setPostData({ title:'', creator:'Dive', selectedFile:''})
-        console.log('updated');
+        setPostData(initialPostState)
     }
 
     const clear = (e) => {
         e.preventDefault()
-        setPostData({ title:'', creator:'Dive', selectedFile:''})
+        setPostData(initialPostState)
         dispatch(setId(null))
     }
 

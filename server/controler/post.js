@@ -8,13 +8,14 @@ module.exports.getPosts = async(req, res) => {
 }
 
 module.exports.createPost = async (req, res) => {
-    console.log(req.headers.userId)
     const {error} = validatePost(req.body)
-    if(error) return res.status(400).send(error.details[0].message)
-
+    console.log({error});
+    if(error) return res.status(400).json({message: error.details[0].message})
+console.log({originalpost: req.body});
     if(!(req.body.title || req.body.selectedFile)) return res.status(400).send("Add some content!!")
 
-    const post = await new Post(_.pick(req.body, ['title', 'selectedFile', 'creator']))
+    const post = await new Post(req.body)
+    console.log({post});
     await post.save()
     res.json(post)
 }

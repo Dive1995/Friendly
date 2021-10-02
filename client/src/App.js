@@ -20,9 +20,9 @@ const theme = {
 function App() {
   const dispatch = useDispatch()
   const posts = useSelector(state => state.posts)
-  const user = useSelector(state => state.user)
+
   console.log(posts);
-  console.log(user);
+
 
   useEffect(() => {
     dispatch(getPosts())
