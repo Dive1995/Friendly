@@ -1,10 +1,28 @@
 import Input from "../../Styles/Input.styled"
 import { Container, Logo, Menu, NavStyled } from "./Nav.styled"
 import { Link } from "react-router-dom"
-import { FaHome, FaSignInAlt, FaUser, FaUsers } from 'react-icons/fa'
+import { FaHome, FaSignInAlt, FaSignOutAlt, FaUser, FaUsers } from 'react-icons/fa'
+import { useEffect, useState } from "react"
+import { useDispatch } from "react-redux"
+import {useHistory, useLocation} from 'react-router-dom'
 
 
-function Nav() {
+function Nav({user, setUser}) {
+    const dispatch = useDispatch()
+    const history = useHistory()
+    const location = useLocation();
+
+    useEffect(() => {
+        setUser(JSON.parse(localStorage?.getItem('userProfile'))?.user)
+      },[location])
+
+    const handleLogout = (e) => {
+        e.preventDefault()
+        dispatch({type: "LOG_OUT"})
+        setUser(null)
+        history.push('/auth')
+    }
+
     return (
         <NavStyled>
             {/* <Container> */}
@@ -14,10 +32,14 @@ function Nav() {
             <Input placeholder="Search"/>
             <Menu>
                 <ul>
-                    <li><Link to="/"><FaHome/> </Link></li>
-                    <li><Link to="/profile"><FaUser/></Link></li>
-                    <li><Link to="/friends"><FaUsers/></Link></li>
+                    {user ? <>
+                        <li><Link to="/"><FaHome/> </Link></li>
+                        <li><Link to="/profile"><FaUser/></Link></li>
+                        <li><Link to="/friends"><FaUsers/></Link></li>
+                        <li><a onClick={handleLogout} href=""><FaSignOutAlt/></a></li>
+                    </> :
                     <li><Link to="/auth"><FaSignInAlt/></Link></li>
+                    }
                 </ul>
             </Menu>
             {/* </Container> */}

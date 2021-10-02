@@ -20,7 +20,7 @@ function CreatePost() {
         if(post){
             setPostData({...postData, ...post})
         }
-    }, [post])
+    }, [postData])
 
     const handleSubmit = (e) => {
         e.preventDefault()

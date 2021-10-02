@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux"
 import { updateLike } from "../../../actions/posts"
 import StyledLike from "./Like.styled"
 
-function Like({likes, id}) {
+function Like({likes, id, user}) {
     const dispatch = useDispatch()
     const [isLiked, setIsLiked] = useState(false)
 
@@ -13,14 +13,14 @@ function Like({likes, id}) {
     }
 
     useEffect(() => {
-        const index = likes.findIndex((id) => id === JSON.parse(localStorage.getItem('userProfile')).user._id)
+        const index = likes.findIndex((id) => id ===  user?._id)
         index === -1 ? setIsLiked(false) : setIsLiked(true)
     }, [likes])
 
     return (
         <StyledLike>
             <span className="heart" onClick={() => triggerLike(id)}>
-                {isLiked ? <FaHeart/> : <FaRegHeart />}
+                {isLiked && user ? <FaHeart/> : <FaRegHeart />}
             </span>
             <p>{likes.length}</p>
         </StyledLike>

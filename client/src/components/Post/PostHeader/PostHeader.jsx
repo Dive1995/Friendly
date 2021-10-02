@@ -7,8 +7,9 @@ import Button from "../../../Styles/Button.styled"
 import { setId } from "../../../actions/currentId"
 
 
-function PostHeader({ creator, createdAt, id }) {
+function PostHeader({ creator, createdAt, id, user }) {
     const dispatch = useDispatch()
+
 
     return (
         <StyledPostHeader>
@@ -17,9 +18,9 @@ function PostHeader({ creator, createdAt, id }) {
                 <Time>{moment(createdAt).fromNow()}</Time>
             </UserDetails>
             <Options>
-                <FaEllipsisH className="icon" onClick={() => dispatch(deletePost(id))}/>
+                {(creator._id === JSON.parse(localStorage?.getItem('userProfile'))?.user?._id) && <FaEllipsisH className="icon" onClick={() => dispatch(deletePost(id))}/>}
             </Options>
-            <Button bg="hsl(222, 100%, 61%)" onClick={() => dispatch(setId(id))}>Edit</Button>
+            {(creator._id === JSON.parse(localStorage?.getItem('userProfile'))?.user?._id) && <Button bg="hsl(222, 100%, 61%)" onClick={() => dispatch(setId(id))}>Edit</Button>}
             
         </StyledPostHeader>
     )

@@ -31,7 +31,7 @@ const postSchema = new mongoose.Schema({
 
 const validatePost = (req) => {
     const schema = Joi.object({
-        title: Joi.string().trim(),
+        title: Joi.string().trim().empty(''),
         creatorId: Joi.string().required(),
         selectedFile: Joi.string().empty('')
     }).unknown(true)

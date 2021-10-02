@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux"
 import { useState } from "react"
 import {useHistory} from 'react-router-dom'
 import {register, login} from '../../actions/auth'
+import {GoogleLogin} from 'react-google-login'
 
 
 function Auth() {
@@ -28,19 +29,49 @@ function Auth() {
         setFormData({firstName:'', lastName:'',email:'', password:''})
     }
 
+
+    const googleSuccess = async (res) => {
+        const user = res?.profileObj
+        const token = res?.tokenId
+
+        try {
+            dispatch({type:"AUTH", payload: {user, token}})
+            history.push('/')
+            
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+    const googleFailure = () => {
+        console.log("Google login failed");
+    }
+
     return (
         <StyledAuth>
             {isSignUp ? <h1>Sign Up</h1> : <h1>Sign In</h1>}
             <form onSubmit={handleSubmit}>
                 {isSignUp && <div>
-                    <Input type="text" name="firstName" placeholder="First Name" onChange={handleChange}/>
-                    <Input type="text" name="lastName" placeholder="Last Name" onChange={handleChange}/>
+                    <Input type="text" required name="firstName" placeholder="First Name" onChange={handleChange}/>
+                    <Input type="text" required name="lastName" placeholder="Last Name" onChange={handleChange}/>
                 </div>}
-                <Input type="email" name="email" placeholder="Email" onChange={handleChange}/>
-                <Input type="password" name="password" placeholder="Password" onChange={handleChange}/>
+                <Input type="email" required name="email" placeholder="Email" onChange={handleChange}/>
+                <Input type="password" required name="password" placeholder="Password" onChange={handleChange}/>
+
+                <GoogleLogin
+                    clientId="1013389727217-f33t6k2cl8rs60ih3bck1h1ftvv3i82d.apps.googleusercontent.com"
+                    render={(renderProps) => (
+                        <Button bg='blue' onClick={renderProps.onClick} disabled={renderProps.disabled}>Sign in with Google</Button>
+                    )}
+                    onSuccess={googleSuccess}
+                    onFailure={googleFailure}
+                    cookiePolicy="single_host_origin"
+                />
+
                 <Button bg={isSignUp ? "blue" : "green"} type="submit">{isSignUp ? "Sign Up" : "Sign In"}</Button>
             </form>
-            <a onClick={() => setIsSignUp(!isSignUp)}>{isSignUp ? "Already have an account?" : "Don't have an account?"}</a>
+            <a onClick={() => setIsSignUp((isSignUp) => !isSignUp)}>{isSignUp ? "Already have an account?" : "Don't have an account?"}</a>
         </StyledAuth>
     )
 }
