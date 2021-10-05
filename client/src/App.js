@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Switch, useLocation } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import CreatePost from "./components/CreatePost/CreatePost";
 import HomeFeed from "./components/HomeFeed/HomeFeed";
 import { ThemeProvider } from "styled-components";
@@ -9,6 +9,7 @@ import Container from "./Styles/Container.styled";
 import GlobalStyles from "./Styles/Global.styled";
 import Nav from "./components/Nav/Nav";
 import Auth from './components/Auth/Auth';
+import Notification from './Styles/Notification.styled';
 
 const theme = {
   colors: {
@@ -21,10 +22,10 @@ function App() {
   const dispatch = useDispatch()
   const posts = useSelector(state => state.posts)
   const error = useSelector(state => state.error)
+
+  const [alert, setAlert] = useState({message:'', status:'', isAlert: false})
   // const location = useLocation();
 
-  console.log({message: error?.status});
-  console.log({message: error?.data?.message});
   const [user, setUser] = useState(null)
 
   // useEffect(() => {
@@ -35,10 +36,20 @@ function App() {
     dispatch(getPosts())
   }, [dispatch])
 
+  useEffect(() => {
+    setAlert(error)
+
+    setTimeout(() => {
+      setAlert({message:'', status:'', isAlert: false})
+    },3000)
+  }, [error])
 
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles/>
+      { alert.isAlert && <Notification>
+      {alert?.message}
+      </Notification>}
       <Router>
           <Nav user={user} setUser={setUser}/>
           <Container>
