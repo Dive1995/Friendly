@@ -26,6 +26,7 @@ const postReducer = (posts = [], action) => {
                 }
                 return post
             })
+    
 
         default :
             return posts;

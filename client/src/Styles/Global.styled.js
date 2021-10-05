@@ -21,5 +21,10 @@ const GlobalStyles = createGlobalStyle`
         object-fit: cover;
     }
 
+    a{
+        text-decoration: none;
+        color: #333;
+    }
+
 `
 export default GlobalStyles;

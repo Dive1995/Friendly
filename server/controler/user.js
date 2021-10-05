@@ -24,6 +24,15 @@ module.exports.signUp = async (req, res) =>  {
     // res.json(user)
 }
 
+module.exports.searchUsers = async (req, res) => {
+    // const pattern = `/.*${req.body.firstName}.*/i`
+    const pattern = `/.*Thavarasa.*/`
+    console.log(pattern);
+    const users  = await User.find({ firstName: /.*Thavarasa.*/})
+    console.log(users);
+    res.send(users)
+}
+
 module.exports.getAllUsers = async (req, res) => {
     const users = await User.find()
     res.json(users)

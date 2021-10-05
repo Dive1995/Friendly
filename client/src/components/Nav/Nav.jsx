@@ -29,9 +29,11 @@ function Nav({user, setUser}) {
         <NavStyled>
             {/* <Container> */}
             <Logo>
-                <h1>Friendly</h1>
+                <Link to="/">
+                    <h1>Friendly</h1>
+                </Link>
             </Logo>
-            {/* <Input placeholder="Search"/> */}
+            <Input placeholder="Search"/>
             <Menu>
                 <ul>
                     {user ? <>

@@ -38,8 +38,6 @@ export const Menu = styled.div`
     }
 
     a{
-        text-decoration: none;
-        color: #333;
         /* font-size: 0.9rem; */
 
         &:hover{

@@ -20,8 +20,11 @@ const theme = {
 function App() {
   const dispatch = useDispatch()
   const posts = useSelector(state => state.posts)
+  const error = useSelector(state => state.error)
   // const location = useLocation();
 
+  console.log({message: error?.status});
+  console.log({message: error?.data?.message});
   const [user, setUser] = useState(null)
 
   // useEffect(() => {
