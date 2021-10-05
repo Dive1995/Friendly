@@ -4,7 +4,7 @@ import PostHeader from "./PostHeader/PostHeader"
 
 
 function Post({post, user}) {
-    console.log({Post : user});
+    // console.log({Post : user});
 
     return (
         <StyledPost>

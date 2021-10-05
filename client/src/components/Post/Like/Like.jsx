@@ -15,7 +15,7 @@ function Like({likes, id, user}) {
     useEffect(() => {
         const index = likes.findIndex((id) => id ===  user?._id)
         index === -1 ? setIsLiked(false) : setIsLiked(true)
-    }, [likes])
+    }, [user?._id, likes])
 
     return (
         <StyledLike>

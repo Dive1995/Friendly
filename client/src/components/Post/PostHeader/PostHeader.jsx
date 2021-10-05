@@ -10,6 +10,11 @@ import { setId } from "../../../actions/currentId"
 function PostHeader({ creator, createdAt, id, user }) {
     const dispatch = useDispatch()
 
+    const handleEdit = (id) => {
+        console.log("Ediiting");
+        dispatch(setId(id))
+    }
+
 
     return (
         <StyledPostHeader>
@@ -20,7 +25,7 @@ function PostHeader({ creator, createdAt, id, user }) {
             <Options>
                 {(creator._id === JSON.parse(localStorage?.getItem('userProfile'))?.user?._id) && <FaEllipsisH className="icon" onClick={() => dispatch(deletePost(id))}/>}
             </Options>
-            {(creator._id === JSON.parse(localStorage?.getItem('userProfile'))?.user?._id) && <Button bg="hsl(222, 100%, 61%)" onClick={() => dispatch(setId(id))}>Edit</Button>}
+            {(creator._id === JSON.parse(localStorage?.getItem('userProfile'))?.user?._id) && <Button bg="hsl(222, 100%, 61%)" onClick={() => handleEdit(id)}>Edit</Button>}
             
         </StyledPostHeader>
     )

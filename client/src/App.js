@@ -42,7 +42,7 @@ function App() {
           <Switch>
             <Route exact path='/'>
                 {/* {modalOpen && <Modal />} */}
-                <CreatePost />
+                <CreatePost user={user}/>
                 <HomeFeed user={user}/>
             </Route>
           <Route exact path="/auth">

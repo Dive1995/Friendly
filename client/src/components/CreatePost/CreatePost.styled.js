@@ -8,6 +8,12 @@ export const StyledCreatePost = styled.div`
     border-radius: 20px;
     box-shadow: 0 0 5px rgba(0,0,0,0.2);
 
+
+    span{
+        font-weight: bold;
+        color: #000;
+    }
+
 `
 
 export const Content = styled.div`

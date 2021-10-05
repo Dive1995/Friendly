@@ -9,7 +9,7 @@ import { setId } from "../../actions/currentId"
 
 const initialPostState = { title:'', creatorId: JSON.parse(localStorage?.getItem('userProfile'))?.user._id, selectedFile:''}
 
-function CreatePost() {
+function CreatePost({user}) {
     const dispatch = useDispatch()
     const [ postData, setPostData ] = useState(initialPostState)
     const currentId = useSelector(state => state.currentId)
@@ -20,7 +20,7 @@ function CreatePost() {
         if(post){
             setPostData({...postData, ...post})
         }
-    }, [postData])
+    }, [post])
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -47,6 +47,8 @@ function CreatePost() {
 
     return (
         <StyledCreatePost>
+            {
+             user ?   
             <form action="" onSubmit={handleSubmit}>
                 <Content>
                     <Input placeholder="What's on your mind!" type="text" value={postData.title} onChange={(e) => setPostData({...postData, title:e.target.value})}/>
@@ -68,6 +70,11 @@ function CreatePost() {
                     <Button bg="hsl(15, 80%, 67%)" onClick={clear}>Clear</Button>
                 </ButtonContainer>
             </form>
+            :
+            <>
+                <p><span>Log In / Sign Up</span> to post your moments with others.</p>
+            </>
+            }
         </StyledCreatePost>
     )
 }
