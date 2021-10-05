@@ -12,6 +12,8 @@ function Nav({user, setUser}) {
     const history = useHistory()
     const location = useLocation();
 
+    console.log({user});
+
     useEffect(() => {
         setUser(JSON.parse(localStorage?.getItem('userProfile'))?.user)
       },[location])
@@ -29,13 +31,15 @@ function Nav({user, setUser}) {
             <Logo>
                 <h1>Friendly</h1>
             </Logo>
-            <Input placeholder="Search"/>
+            {/* <Input placeholder="Search"/> */}
             <Menu>
                 <ul>
                     {user ? <>
-                        <li><Link to="/"><FaHome/> </Link></li>
-                        <li><Link to="/profile"><FaUser/></Link></li>
-                        <li><Link to="/friends"><FaUsers/></Link></li>
+                        <li><span>{user.lastName.charAt(0)}</span></li>
+                        <li>{user.lastName}</li>
+                        {/* <li><Link to="/"><FaHome/> </Link></li> */}
+                        {/* <li><Link to="/profile"><FaUser/></Link></li> */}
+                        {/* <li><Link to="/friends"><FaUsers/></Link></li> */}
                         <li><a onClick={handleLogout} href=""><FaSignOutAlt/></a></li>
                     </> :
                     <li><Link to="/auth"><FaSignInAlt/></Link></li>

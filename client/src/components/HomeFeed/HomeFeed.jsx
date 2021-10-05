@@ -4,7 +4,6 @@ import Loading from "../Loading/Loading";
 const { default: Post } = require("../Post/Post");
 
 function HomeFeed({user}) {
-    console.log({HomeFeed : user});
     const posts = useSelector((state) => state.posts)
     
     if(posts?.length < 1){

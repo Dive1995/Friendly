@@ -7,6 +7,19 @@ export const NavStyled = styled.nav`
     padding: 0 5rem;
     align-items: center;
     justify-content: space-between;
+
+    span{
+        display: inline-block;
+        width: 2.5rem;
+        height: 2.5rem;
+        background-color: palegoldenrod;
+        /* padding: 10px; */
+        border-radius:50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+    }
 `
 
 export const Logo = styled.div`
@@ -17,6 +30,7 @@ export const Menu = styled.div`
     ul{
         list-style-type: none;
         display: flex;
+        align-items: center;
     }
 
     li{
