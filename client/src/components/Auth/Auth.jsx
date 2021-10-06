@@ -26,7 +26,7 @@ function Auth() {
         }else{
             dispatch(login(formData, history))
         }
-        setFormData({firstName:'', lastName:'',email:'', password:''})
+        // setFormData({firstName:'', lastName:'',email:'', password:''})
     }
 
 
@@ -53,11 +53,11 @@ function Auth() {
             {isSignUp ? <h1>Sign Up</h1> : <h1>Sign In</h1>}
             <form onSubmit={handleSubmit}>
                 {isSignUp && <div>
-                    <Input type="text" required name="firstName" placeholder="First Name" onChange={handleChange}/>
-                    <Input type="text" required name="lastName" placeholder="Last Name" onChange={handleChange}/>
+                    <Input type="text"  name="firstName" placeholder="First Name" onChange={handleChange}/>
+                    <Input type="text"  name="lastName" placeholder="Last Name" onChange={handleChange}/>
                 </div>}
-                <Input type="email" required name="email" placeholder="Email" onChange={handleChange}/>
-                <Input type="password" required name="password" placeholder="Password" onChange={handleChange}/>
+                <Input type="email"  name="email" placeholder="Email" onChange={handleChange}/>
+                <Input type="password"  name="password" placeholder="Password" onChange={handleChange}/>
 
                 <GoogleLogin
                     clientId="1013389727217-f33t6k2cl8rs60ih3bck1h1ftvv3i82d.apps.googleusercontent.com"

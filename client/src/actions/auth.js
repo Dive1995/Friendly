@@ -7,6 +7,7 @@ export const register = (userdata, history) => async (dispatch) => {
         history.push('/')
     } catch (error) {
         console.log(error);
+        dispatch({type: "ERROR", payload: error.response})
     }
 }
 
@@ -17,5 +18,6 @@ export const login = (loginData, history) => async (dispatch) => {
         history.push('/')
     } catch (error) {
         console.log(error);
+        dispatch({type: "ERROR", payload: error.response})
     }
 }

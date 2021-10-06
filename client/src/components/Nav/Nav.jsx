@@ -12,7 +12,6 @@ function Nav({user, setUser}) {
     const history = useHistory()
     const location = useLocation();
 
-    console.log({user});
 
     useEffect(() => {
         setUser(JSON.parse(localStorage?.getItem('userProfile'))?.user)

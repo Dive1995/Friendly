@@ -7,34 +7,41 @@ import Button from "../../Styles/Button.styled"
 import Input from "../../Styles/Input.styled"
 import { setId } from "../../actions/currentId"
 
-const initialPostState = { title:'', creatorId: JSON.parse(localStorage?.getItem('userProfile'))?.user._id, selectedFile:''}
 
 function CreatePost({user}) {
+    const initialPostState = { title:'', creatorId: user?._id, selectedFile:''}
     const dispatch = useDispatch()
-    const [ postData, setPostData ] = useState(initialPostState)
+    const [ postData, setPostData ] = useState({title:'', creatorId: '', selectedFile:''})
     const currentId = useSelector(state => state.currentId)
     const post = useSelector(state => currentId ? state.posts.find(item => item._id === currentId) : null)
     const imageInputRef = useRef()
 
+
+    // set post data while user login
+    useEffect(() => {
+        setPostData({title:'', creatorId: user?._id, selectedFile:''})
+    }, [user])
+
+    // if edit post exist load the data to postData
     useEffect(() => {
         if(post){
             setPostData({...postData, ...post})
         }
     }, [post])
 
+    // submit post
     const handleSubmit = (e) => {
         e.preventDefault()
         if(currentId){
-            console.log({postData});
             dispatch(updatePost(currentId, postData))
         }else{
-            console.log({postData});
             dispatch(createPost(postData))
         }
-        dispatch(setId(null))
         setPostData(initialPostState)
+        dispatch(setId(null))
     }
 
+    // clear the form field
     const clear = (e) => {
         e.preventDefault()
         setPostData(initialPostState)
