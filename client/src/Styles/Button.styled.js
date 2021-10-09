@@ -12,6 +12,7 @@ const Button = styled.button`
     border: none;
     letter-spacing: 1px;
     box-shadow: 0 0 5px  rgba(0,0,0,0.2);
+    margin: 0.2rem 0;
 
     &:hover{
         opacity: 0.8;

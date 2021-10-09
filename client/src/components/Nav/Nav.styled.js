@@ -19,6 +19,10 @@ export const NavStyled = styled.nav`
         align-items: center;
         justify-content: center;
         font-weight: 700;
+
+        img{
+            border-radius: 50%;
+        }
     }
 `
 

@@ -24,6 +24,8 @@ function Nav({user, setUser}) {
         history.push('/auth')
     }
 
+    console.log({user});
+
     return (
         <NavStyled>
             {/* <Container> */}
@@ -36,8 +38,9 @@ function Nav({user, setUser}) {
             <Menu>
                 <ul>
                     {user ? <>
-                        <li><span>{user.lastName.charAt(0)}</span></li>
-                        <li>{user.lastName}</li>
+                        {user?.lastName && <li><span>{user?.lastName?.charAt(0)}</span></li>}
+                        <li><span><img src={user?.imageUrl}/></span></li>
+                        <li>{user?.lastName || user?.familyName}</li>
                         {/* <li><Link to="/"><FaHome/> </Link></li> */}
                         {/* <li><Link to="/profile"><FaUser/></Link></li> */}
                         {/* <li><Link to="/friends"><FaUsers/></Link></li> */}

@@ -12,8 +12,9 @@ function Like({likes, id, user}) {
         dispatch(updateLike(id))
     }
 
+
     useEffect(() => {
-        const index = likes.findIndex((id) => id ===  user?._id)
+        const index = likes.findIndex((id) => id ===  user?._id || user?.googleId)
         index === -1 ? setIsLiked(false) : setIsLiked(true)
     }, [user?._id, likes])
 

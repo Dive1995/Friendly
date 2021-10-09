@@ -58,18 +58,19 @@ function Auth() {
                 </div>}
                 <Input type="email"  name="email" placeholder="Email" onChange={handleChange}/>
                 <Input type="password"  name="password" placeholder="Password" onChange={handleChange}/>
+                <Button bg={isSignUp ? "blue" : "green"} type="submit">{isSignUp ? "Sign Up" : "Sign In"}</Button>
 
                 <GoogleLogin
                     clientId="1013389727217-f33t6k2cl8rs60ih3bck1h1ftvv3i82d.apps.googleusercontent.com"
                     render={(renderProps) => (
-                        <Button bg='blue' onClick={renderProps.onClick} disabled={renderProps.disabled}>Sign in with Google</Button>
+                        <Button bg='dodgerblue' onClick={renderProps.onClick} disabled={renderProps.disabled}>Sign in with Google</Button>
                     )}
                     onSuccess={googleSuccess}
                     onFailure={googleFailure}
                     cookiePolicy="single_host_origin"
                 />
 
-                <Button bg={isSignUp ? "blue" : "green"} type="submit">{isSignUp ? "Sign Up" : "Sign In"}</Button>
+                
             </form>
             <a onClick={() => setIsSignUp((isSignUp) => !isSignUp)}>{isSignUp ? "Already have an account?" : "Don't have an account?"}</a>
         </StyledAuth>
