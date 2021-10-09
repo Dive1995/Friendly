@@ -14,10 +14,7 @@ function Like({likes, id, user}) {
 
 
     useEffect(() => {
-        console.log({likes})
-        console.log(user?._id);
         const index = likes.findIndex((id) => id ===  (user?._id || user?.googleId))
-        console.log({index});
         index === -1 ? setIsLiked(false) : setIsLiked(true)
     }, [user?._id, user?.googleId, likes])
 

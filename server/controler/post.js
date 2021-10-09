@@ -80,7 +80,6 @@ module.exports.getSinglePost = async (req, res) => {
 
 module.exports.updateLike = async (req, res) => {
     const userId = req.userId;
-    console.log(userId);
 
     if(!mongoose.Types.ObjectId.isValid(req.params.id)) return res.status(400).json({message: "No post found"})
 
@@ -90,10 +89,8 @@ module.exports.updateLike = async (req, res) => {
     const index = post.likes.findIndex((id) => id === userId)
 
     if(index === -1){
-        console.log("Like added")
         post.likes.push(userId)
     }else{
-        console.log("like removed")
         post.likes = post.likes.filter((id) => id !== userId)
     }
 

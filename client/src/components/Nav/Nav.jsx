@@ -5,6 +5,7 @@ import { FaHome, FaSignInAlt, FaSignOutAlt, FaUser, FaUsers } from 'react-icons/
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import {useHistory, useLocation} from 'react-router-dom'
+import decode from 'jwt-decode'
 
 
 function Nav({user, setUser}) {
@@ -15,10 +16,19 @@ function Nav({user, setUser}) {
 
     useEffect(() => {
         setUser(JSON.parse(localStorage?.getItem('userProfile'))?.user)
-      },[location])
+    },[location])
 
-    const handleLogout = (e) => {
-        e.preventDefault()
+    useEffect(() => {
+        const token = JSON.parse(localStorage?.getItem('userProfile'))?.token
+
+        if(token){
+            const decodedToken = decode(token)
+
+            if(decodedToken.exp*1000 < new Date().getTime()) handleLogout()
+        }
+    }, [])
+
+    const handleLogout = () => {
         dispatch({type: "LOG_OUT"})
         setUser(null)
         history.push('/auth')
@@ -38,7 +48,7 @@ function Nav({user, setUser}) {
                 <ul>
                     {user ? <>
                         {user?.lastName && <li><span>{user?.lastName?.charAt(0)}</span></li>}
-                        <li><span><img src={user?.imageUrl}/></span></li>
+                        {user?.imageUrl && <li><span><img src={user?.imageUrl}/></span></li>}
                         <li>{user?.lastName || user?.familyName}</li>
                         {/* <li><Link to="/"><FaHome/> </Link></li> */}
                         {/* <li><Link to="/profile"><FaUser/></Link></li> */}
