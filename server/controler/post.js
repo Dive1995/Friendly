@@ -90,8 +90,10 @@ module.exports.updateLike = async (req, res) => {
     const index = post.likes.findIndex((id) => id === userId)
 
     if(index === -1){
+        console.log("Like added")
         post.likes.push(userId)
     }else{
+        console.log("like removed")
         post.likes = post.likes.filter((id) => id !== userId)
     }
 

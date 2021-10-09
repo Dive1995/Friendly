@@ -24,7 +24,6 @@ function Nav({user, setUser}) {
         history.push('/auth')
     }
 
-    console.log({user});
 
     return (
         <NavStyled>
