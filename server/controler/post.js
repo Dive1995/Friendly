@@ -4,7 +4,16 @@ const _ = require('lodash')
 const { User } = require("../model/user")
 
 module.exports.getPosts = async(req, res) => {
-    const posts = await Post.find().sort('-createdAt')
+    const pageNumber = Number(req.query.pageNumber);
+    const pageSize = Number(req.query.pageSize) || 10;
+
+
+    const posts = await Post
+        .find()
+        .sort('-createdAt')
+        .skip((pageNumber - 1) * pageSize)
+        .limit(pageSize)
+
     res.json(posts)
 }
 
