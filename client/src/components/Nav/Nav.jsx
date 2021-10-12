@@ -33,7 +33,7 @@ function Nav({user, setUser}) {
         setUser(null)
         history.push('/auth')
     }
-
+    console.log(user?.imageUrl);
 
     return (
         <NavStyled>

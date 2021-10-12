@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import Loading from "../Loading/Loading";
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 const { default: Post } = require("../Post/Post");
 
@@ -11,9 +12,12 @@ function HomeFeed({user}) {
     }
 
     return (
-        <div>
+        <InfiniteScroll
+            dataLength={posts.length}
+            
+        >
             {posts.map((post) => <Post user={user} key={post._id} post={post}/>)}
-        </div>
+        </InfiniteScroll>
     )
 }
 
