@@ -32,16 +32,18 @@ function App() {
   //   setUser(JSON.parse(localStorage?.getItem('userProfile'))?.user)
   // },[location])
 
-  useEffect(() => {
-    dispatch(getPosts())
-  }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(getPosts(1, 2))
+  // }, [dispatch])
 
   useEffect(() => {
     setAlert(error)
 
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       setAlert({message:'', status:'', isAlert: false})
     },3000)
+
+    return () => clearTimeout(timeout)
   }, [error])
 
   return (

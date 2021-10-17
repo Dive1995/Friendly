@@ -6,6 +6,8 @@ const { User } = require("../model/user")
 module.exports.getPosts = async(req, res) => {
     const pageNumber = Number(req.query.pageNumber);
     const pageSize = Number(req.query.pageSize) || 10;
+    console.log({pageNumber})
+    console.log({pageSize})
 
 
     const posts = await Post

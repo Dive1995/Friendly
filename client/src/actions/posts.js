@@ -1,8 +1,8 @@
 import * as api from '../api'
 
-export const getPosts = () => async (dispatch) => {
+export const getPosts = (pageNumber, pageSize) => async (dispatch) => {
     try {
-        const { data } = await api.fetchPosts()
+        const { data } = await api.fetchPosts(pageNumber, pageSize)
         dispatch({ type: "FETCH_ALL", payload: data })
     } catch (error) {
         dispatch({type: "ERROR", payload: error.response})
